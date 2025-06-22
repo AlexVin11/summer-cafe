@@ -1,54 +1,96 @@
-// Навигация при скролле
-let lastScroll = 0;
-
-window.addEventListener('scroll', () => {
-  const currentScroll = window.pageYOffset;
-  const nav = document.querySelector('nav');
-
-  // Прячем навигацию при скролле вниз, показываем при скролле вверх
-  if (currentScroll > lastScroll && currentScroll > 50) {
-    nav.classList.add('hidden');
-  } else {
-    nav.classList.remove('hidden');
-  }
-
-  // Добавляем эффект при скролле
-  if (currentScroll > 50) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
-  }
-
-  lastScroll = currentScroll;
-});
-
-// Модальные окна
 document.addEventListener('DOMContentLoaded', function() {
+  // Элементы DOM
+  const header = document.querySelector('.header');
+  const nav = document.querySelector('.header__nav');
+  const burger = document.querySelector('.header__burger');
+  const navLinks = document.querySelectorAll('.header__link');
   const modalBtns = document.querySelectorAll('.open-modal');
   const modals = document.querySelectorAll('.modal');
   const closeBtns = document.querySelectorAll('.close');
 
+  // Переменные для скролла
+  let lastScroll = 0;
+  const headerHeight = header.offsetHeight;
+
+  // Установка отступа для основного контента
+  document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+
+  // Функция для управления скроллом хедера
+  function handleHeaderScroll() {
+    const currentScroll = window.pageYOffset;
+
+    // Управление видимостью хедера
+    if (currentScroll <= 0) {
+      header.style.transform = 'translateY(0)';
+      header.classList.remove('scrolled');
+      return;
+    }
+
+    // Показываем/скрываем хедер при скролле
+    if (currentScroll > lastScroll && currentScroll > headerHeight) {
+      if (!nav.classList.contains('active')) {
+        header.style.transform = 'translateY(-100%)';
+      }
+    } else {
+      header.style.transform = 'translateY(0)';
+    }
+
+    // Добавляем эффект при скролле
+    if (currentScroll > headerHeight) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+
+    lastScroll = currentScroll;
+  }
+
+  // Функции для модальных окон
+  function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+
+  // Функции для мобильного меню
+  function toggleMenu() {
+    burger.classList.toggle('active');
+    nav.classList.toggle('active');
+    document.body.classList.toggle('lock');
+  }
+
+  function closeMenu() {
+    burger.classList.remove('active');
+    nav.classList.remove('active');
+    document.body.classList.remove('lock');
+  }
+
+  // Обработчики событий
+  window.addEventListener('scroll', handleHeaderScroll);
+
+  // Модальные окна
   modalBtns.forEach(btn => {
     btn.addEventListener('click', function() {
       const modalId = this.getAttribute('data-modal');
-      const modal = document.getElementById(modalId);
-      modal.style.display = 'block';
-      document.body.style.overflow = 'hidden';
+      openModal(modalId);
     });
   });
 
   closeBtns.forEach(btn => {
     btn.addEventListener('click', function() {
       const modal = this.closest('.modal');
-      modal.style.display = 'none';
-      document.body.style.overflow = 'auto';
+      closeModal(modal);
     });
   });
 
   window.addEventListener('click', function(e) {
     if (e.target.classList.contains('modal')) {
-      e.target.style.display = 'none';
-      document.body.style.overflow = 'auto';
+      closeModal(e.target);
     }
   });
 
@@ -56,10 +98,23 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.key === 'Escape') {
       modals.forEach(modal => {
         if (modal.style.display === 'block') {
-          modal.style.display = 'none';
-          document.body.style.overflow = 'auto';
+          closeModal(modal);
         }
       });
+    }
+  });
+
+  // Мобильное меню
+  burger.addEventListener('click', toggleMenu);
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Ресайз (для корректного отображения после изменения ориентации)
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 992) {
+      closeMenu();
     }
   });
 });
