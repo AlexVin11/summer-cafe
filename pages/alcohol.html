@@ -1,1 +1,121 @@
-<!DOCTYPE html><html lang="ru"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Бар - кафе "Новая волна"</title>    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet">    <link rel="stylesheet" href="../style.css"></head><body><header class="header">    <div class="header__container">        <a href="../index.html" class="header__logo">            <span>Новая волна</span>        </a>        <nav class="header__nav">            <ul class="header__menu">                <li><a href="../index.html" class="header__link">Главная</a></li>                <li><a href="dishes.html" class="header__link">Меню</a></li>                <li><a href="services.html" class="header__link">Услуги</a></li>            </ul>        </nav>        <button class="header__burger" aria-label="Меню">            <span></span>            <span></span>            <span></span>        </button>    </div></header><main role="main">    <section class="section">        <div class="container">            <h2>Барная карта</h2>            <p>Авторские коктейли и премиальные напитки</p>            <div class="cards-container">                <!-- Коктейль 1 -->                <div class="card">                    <div class="card-img">                        <img src="../images/pirozhnoe-letnee.jpg" alt="Мохито">                    </div>                    <div class="card-content">                        <h3>Мохито</h3>                        <p>Классический коктейль с белым ромом, лаймом и мятой</p>                        <div class="price">450 руб.</div>                        <button class="btn open-modal" data-modal="modal-drink1">Состав</button>                    </div>                </div>                <!-- Коктейль 2 -->                <div class="card">                    <div class="card-img">                        <img src="../images/pirozhnoe-letnee.jpg" alt="Красное вино">                    </div>                    <div class="card-content">                        <h3>Красное вино</h3>                        <p>Каберне Совиньон, Италия, 2019</p>                        <div class="price">350 руб./бокал</div>                        <button class="btn open-modal" data-modal="modal-drink2">Описание</button>                    </div>                </div>                <!-- Коктейль 3 -->                <div class="card">                    <div class="card-img">                        <img src="../images/pirozhnoe-letnee.jpg" alt="Разливное пиво">                    </div>                    <div class="card-content">                        <h3>Пиво крафтовое</h3>                        <p>Светлое и темное от местной пивоварни</p>                        <div class="price">250 руб./0.5 л</div>                        <button class="btn open-modal" data-modal="modal-drink3">Ассортимент</button>                    </div>                </div>            </div>        </div>    </section></main><footer class="footer" role="contentinfo">    <div class="footer__container">        <div class="footer__content">            <h3 class="footer__title">График работы</h3>            <div class="footer__schedule">                <p>Понедельник-Четверг: <span>12:00 - 23:00</span></p>                <p>Пятница-Воскресенье: <span>12:00 - 01:00</span></p>            </div>        </div>        <div class="footer__copyright">            <p>© 2023 Летнее кафе "Оазис". Все права защищены.</p>        </div>    </div></footer><!-- Модальные окна --><div id="modal-drink1" class="modal" role="dialog" aria-labelledby="modal-drink1-title" aria-modal="true" hidden>    <div class="modal-content">        <span class="close" aria-label="Закрыть окно">&times;</span>        <h3 id="modal-drink1-title">Мохито</h3>        <p>Классический освежающий коктейль:</p>        <ul>            <li>Белый ром Havana Club - 50 мл</li>            <li>Свежий лайм - 1/2 шт</li>            <li>Свежая мята - 8 листьев</li>            <li>Тростниковый сахар - 2 ч.л.</li>            <li>Содовая - 100 мл</li>            <li>Лед в кубиках</li>        </ul>        <p>Объем: 250 мл</p>        <p>Крепость: ~15%</p>        <div class="price">450 руб.</div>    </div></div><script src="../script.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бар - кафе "Новая волна"</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="header">
+    <div class="header__container">
+        <a href="../index.html" class="header__logo">
+            <span>Новая волна</span>
+        </a>
+
+        <nav class="header__nav">
+            <ul class="header__menu">
+                <li><a href="../index.html" class="header__link">Главная</a></li>
+                <li><a href="dishes.html" class="header__link">Меню</a></li>
+                <li><a href="services.html" class="header__link">Услуги</a></li>
+            </ul>
+
+        </nav>
+
+        <button class="header__burger" aria-label="Меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</header>
+
+<main role="main">
+    <section class="section">
+        <div class="container">
+            <h2>Барная карта</h2>
+            <p>Авторские коктейли и премиальные напитки</p>
+
+            <div class="cards-container">
+                <!-- Коктейль 1 -->
+                <div class="card">
+                    <div class="card-img">
+                        <img src="../images/pirozhnoe-letnee.jpg" alt="Мохито">
+                    </div>
+                    <div class="card-content">
+                        <h3>Мохито</h3>
+                        <p>Классический коктейль с белым ромом, лаймом и мятой</p>
+                        <div class="price">450 руб.</div>
+                        <button class="btn open-modal" data-modal="modal-drink1">Состав</button>
+                    </div>
+                </div>
+
+                <!-- Коктейль 2 -->
+                <div class="card">
+                    <div class="card-img">
+                        <img src="../images/pirozhnoe-letnee.jpg" alt="Красное вино">
+                    </div>
+                    <div class="card-content">
+                        <h3>Красное вино</h3>
+                        <p>Каберне Совиньон, Италия, 2019</p>
+                        <div class="price">350 руб./бокал</div>
+                        <button class="btn open-modal" data-modal="modal-drink2">Описание</button>
+                    </div>
+                </div>
+
+                <!-- Коктейль 3 -->
+                <div class="card">
+                    <div class="card-img">
+                        <img src="../images/pirozhnoe-letnee.jpg" alt="Разливное пиво">
+                    </div>
+                    <div class="card-content">
+                        <h3>Пиво крафтовое</h3>
+                        <p>Светлое и темное от местной пивоварни</p>
+                        <div class="price">250 руб./0.5 л</div>
+                        <button class="btn open-modal" data-modal="modal-drink3">Ассортимент</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer" role="contentinfo">
+    <div class="footer__container">
+        <div class="footer__content">
+            <h3 class="footer__title">График работы</h3>
+            <div class="footer__schedule">
+                <p>Понедельник-Четверг: <span>12:00 - 23:00</span></p>
+                <p>Пятница-Воскресенье: <span>12:00 - 01:00</span></p>
+            </div>
+        </div>
+        <div class="footer__copyright">
+            <p>© 2023 Летнее кафе "Оазис". Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Модальные окна -->
+<div id="modal-drink1" class="modal" role="dialog" aria-labelledby="modal-drink1-title" aria-modal="true" hidden>
+    <div class="modal-content">
+        <span class="close" aria-label="Закрыть окно">&times;</span>
+        <h3 id="modal-drink1-title">Мохито</h3>
+        <p>Классический освежающий коктейль:</p>
+        <ul>
+            <li>Белый ром Havana Club - 50 мл</li>
+            <li>Свежий лайм - 1/2 шт</li>
+            <li>Свежая мята - 8 листьев</li>
+            <li>Тростниковый сахар - 2 ч.л.</li>
+            <li>Содовая - 100 мл</li>
+            <li>Лед в кубиках</li>
+        </ul>
+        <p>Объем: 250 мл</p>
+        <p>Крепость: ~15%</p>
+        <div class="price">450 руб.</div>
+    </div>
+</div>
+
+<script src="../script.js"></script>
+</body>
+</html>
