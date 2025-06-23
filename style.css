@@ -250,26 +250,36 @@ h3 { font-size: clamp(1.5rem, 3vw, 1.8rem); }
   }
 }
 
-/* Герой-секция */
+/* Герой-секция - исправленная версия */
 .hero {
+  position: relative;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: url('hero-bg.jpg') no-repeat center/cover;
   color: white;
-  position: relative;
+  overflow: hidden;
 }
 
-.hero::after {
-  content: '';
+.hero-bg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.3);
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
 }
 
 .hero-content {
@@ -279,23 +289,10 @@ h3 { font-size: clamp(1.5rem, 3vw, 1.8rem); }
   padding: 0 20px;
 }
 
+/* Адаптивность */
 @media (max-width: 992px) {
   .hero {
-    height: calc(100vh - 60px); /* Вычитаем высоту хедера */
-    margin-top: 0; /* Убираем внешний отступ */
-    padding-top: 0; /* Убираем внутренний отступ */
-  }
-
-  .hero-content {
-    padding: 20px; /* Добавляем отступы только для контента */
-  }
-}
-
-@media (max-width: 576px) {
-  .hero {
-    height: auto;
-    min-height: calc(100vh - 60px);
-    padding: 20px 0;
+    height: calc(100vh - 60px);
   }
 }
 

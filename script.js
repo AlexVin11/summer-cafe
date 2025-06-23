@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Элементы DOM
+  // ===== Основные элементы DOM =====
   const header = document.querySelector('.header');
   const nav = document.querySelector('.header__nav');
   const burger = document.querySelector('.header__burger');
@@ -8,25 +8,33 @@ document.addEventListener('DOMContentLoaded', function() {
   const modals = document.querySelectorAll('.modal');
   const closeBtns = document.querySelectorAll('.close');
 
-  // Переменные для скролла
+  // ===== Инициализация hero-секции =====
+  const heroBg = document.querySelector('.hero-bg');
+
+  // Проверка загрузки изображения
+  if (heroBg) {
+    heroBg.onerror = () => {
+      console.error('Ошибка загрузки фонового изображения');
+      heroBg.style.display = 'none';
+    };
+
+    // Для отладки
+    console.log('Путь к изображению:', heroBg.src);
+  }
+
+  // ===== Управление хедером при скролле =====
   let lastScroll = 0;
   const headerHeight = header.offsetHeight;
 
-  // Установка отступа для основного контента
-  document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
-
-  // Функция для управления скроллом хедера
   function handleHeaderScroll() {
     const currentScroll = window.pageYOffset;
 
-    // Управление видимостью хедера
     if (currentScroll <= 0) {
       header.style.transform = 'translateY(0)';
       header.classList.remove('scrolled');
       return;
     }
 
-    // Показываем/скрываем хедер при скролле
     if (currentScroll > lastScroll && currentScroll > headerHeight) {
       if (!nav.classList.contains('active')) {
         header.style.transform = 'translateY(-100%)';
@@ -35,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
       header.style.transform = 'translateY(0)';
     }
 
-    // Добавляем эффект при скролле
     if (currentScroll > headerHeight) {
       header.classList.add('scrolled');
     } else {
@@ -45,19 +52,23 @@ document.addEventListener('DOMContentLoaded', function() {
     lastScroll = currentScroll;
   }
 
-  // Функции для модальных окон
+  // ===== Модальные окна =====
   function openModal(modalId) {
     const modal = document.getElementById(modalId);
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
+    if (modal) {
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
   }
 
   function closeModal(modal) {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
   }
 
-  // Функции для мобильного меню
+  // ===== Мобильное меню =====
   function toggleMenu() {
     burger.classList.toggle('active');
     nav.classList.toggle('active');
@@ -70,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.remove('lock');
   }
 
-  // Обработчики событий
+  // ===== Назначение обработчиков событий =====
   window.addEventListener('scroll', handleHeaderScroll);
 
   // Модальные окна
@@ -111,10 +122,16 @@ document.addEventListener('DOMContentLoaded', function() {
     link.addEventListener('click', closeMenu);
   });
 
-  // Ресайз (для корректного отображения после изменения ориентации)
+  // Адаптация к изменению размера окна
   window.addEventListener('resize', function() {
     if (window.innerWidth > 992) {
       closeMenu();
     }
+
+    // Обновление высоты хедера
+    document.documentElement.style.setProperty('--header-height', `${header.offsetHeight}px`);
   });
+
+  // Инициализация высоты хедера
+  document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
 });
